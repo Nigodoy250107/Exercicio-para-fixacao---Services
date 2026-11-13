@@ -1,0 +1,32 @@
+# Dependências e artefatos de build
+node_modules/
+dist/
+.angular/
+coverage/
+out-tsc/
+
+# Configurações locais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs e arquivos temporários
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.temp
+
+# IDEs e sistema operacional
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Arquivos gerados localmente
+*.tsbuildinfo

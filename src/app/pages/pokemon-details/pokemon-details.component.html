@@ -1,0 +1,23 @@
+<section class="details-page">
+  <a class="back-link" routerLink="/">← Voltar para a Pokédex</a>
+  <div class="status-card" *ngIf="loading"><span class="spinner"></span><p>Carregando detalhes...</p></div>
+  <div class="status-card error-card" *ngIf="!loading && errorMessage"><p>{{ errorMessage }}</p><a class="button" routerLink="/">Voltar à listagem</a></div>
+
+  <article class="details-card" *ngIf="!loading && pokemon">
+    <div class="hero-panel">
+      <span class="pokemon-number">#{{ pokemon.id.toString().padStart(3, '0') }}</span>
+      <img [src]="imageUrl" [alt]="formatName(pokemon.name)" (error)="handleImageError($event)">
+      <div class="hero-shadow"></div>
+    </div>
+    <div class="details-content">
+      <p class="eyebrow">Pokémon #{{ pokemon.id }}</p>
+      <h1>{{ formatName(pokemon.name) }}</h1>
+      <div class="type-list"><span class="type-pill" *ngFor="let item of pokemon.types">{{ formatName(item.type.name) }}</span></div>
+      <div class="measurements">
+        <div><span>Altura</span><strong>{{ heightInMeters(pokemon.height) }} m</strong><small>{{ pokemon.height }} dm na API</small></div>
+        <div><span>Peso</span><strong>{{ weightInKg(pokemon.weight) }} kg</strong><small>{{ pokemon.weight }} hg na API</small></div>
+      </div>
+      <div class="info-section"><h2>Habilidades</h2><ul><li *ngFor="let item of pokemon.abilities">{{ formatName(item.ability.name) }}<span *ngIf="item.is_hidden"> (oculta)</span></li></ul></div>
+    </div>
+  </article>
+</section>

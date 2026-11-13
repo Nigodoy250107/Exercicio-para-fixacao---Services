@@ -1,0 +1,24 @@
+<section class="list-page">
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">Primeira geração</p>
+      <h1>Escolha seu Pokémon</h1>
+      <p class="intro">Explore os 20 primeiros Pokémon e descubra suas características.</p>
+    </div>
+    <span class="count-badge" *ngIf="!loading && !errorMessage">{{ pokemons.length }} descobertos</span>
+  </div>
+
+  <div class="status-card" *ngIf="loading"><span class="spinner"></span><p>Carregando Pokémon...</p></div>
+  <div class="status-card error-card" *ngIf="!loading && errorMessage">
+    <p>{{ errorMessage }}</p><button class="button" type="button" (click)="loadPokemons()">Tentar novamente</button>
+  </div>
+
+  <div class="pokemon-grid" *ngIf="!loading && !errorMessage">
+    <a class="pokemon-card" *ngFor="let pokemon of pokemons" [routerLink]="['/pokemon', getId(pokemon.url)]">
+      <span class="pokemon-number">#{{ getId(pokemon.url).toString().padStart(3, '0') }}</span>
+      <img [src]="getImage(pokemon.url)" [alt]="formatName(pokemon.name)" (error)="handleImageError($event, pokemon.url)" loading="lazy">
+      <span class="pokemon-name">{{ formatName(pokemon.name) }}</span>
+      <span class="card-link">Ver detalhes <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</section>
